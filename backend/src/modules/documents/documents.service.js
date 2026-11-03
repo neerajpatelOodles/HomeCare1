@@ -3,10 +3,35 @@
  * Files are validated first, written to private storage, and only then recorded
  * in the database; if the database step fails the files are removed again.
  */
+const fs = require('fs');
+const path = require('path');
 const { pool, query } = require('../../config/db');
-const storage = require('../../storage');
 const { checkFile } = require('../../middleware/upload');
 const ApiError = require('../../utils/ApiError');
+
+function resolveStorageModule() {
+  const candidates = [
+    path.resolve(__dirname, '../../storage'),
+    path.resolve(__dirname, '../../../storage'),
+    path.resolve(process.cwd(), 'storage'),
+    path.resolve(process.cwd(), 'backend', 'storage'),
+    path.resolve(process.cwd(), 'backend', 'src', 'storage'),
+  ];
+
+  for (const dir of candidates) {
+    const direct = path.join(dir, 'index.js');
+    if (fs.existsSync(direct)) return require(direct);
+
+    const nested = path.join(dir, 'src', 'storage', 'index.js');
+    if (fs.existsSync(nested)) return require(nested);
+  }
+
+  throw new Error(
+    `Unable to resolve storage module. Checked: ${candidates.map((c) => c).join(', ')}`
+  );
+}
+
+const storage = resolveStorageModule();
 
 /** files: [{ file: multerFile, docType }] -> validated list (throws ApiError on a bad file). */
 function prepare(files) {
