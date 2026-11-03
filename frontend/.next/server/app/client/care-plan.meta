@@ -1,0 +1,39 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/client/layout,_N_T_/client/care-plan/layout,_N_T_/client/care-plan/page,_N_T_/client/care-plan"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/client/care-plan/__PAGE__"
+  ],
+  "prefetchHints": {
+    "hints": 64,
+    "slots": {
+      "children": {
+        "hints": 96,
+        "slots": {
+          "children": {
+            "hints": 96,
+            "slots": {
+              "children": {
+                "hints": 160,
+                "slots": null
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "routeCache": {
+    "key": "/route-cache/APP_PAGE/b12e7b8d9163217913bb8c2dd590b83bb20a58960e6d8e98719e073bb7c72cd4/$/client/care-plan",
+    "owner": {
+      "kind": "APP_PAGE",
+      "sourceRoute": "/client/care-plan/page"
+    },
+    "isFallback": false
+  }
+}

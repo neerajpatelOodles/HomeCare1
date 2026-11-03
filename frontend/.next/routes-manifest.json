@@ -1,0 +1,206 @@
+{
+  "version": 3,
+  "pages404": true,
+  "appType": "app",
+  "caseSensitive": false,
+  "basePath": "",
+  "redirects": [
+    {
+      "source": "/:path+/",
+      "destination": "/:path+",
+      "internal": true,
+      "priority": true,
+      "statusCode": 308,
+      "regex": "^(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))/$"
+    }
+  ],
+  "headers": [],
+  "onMatchHeaders": [],
+  "rewrites": {
+    "beforeFiles": [],
+    "afterFiles": [
+      {
+        "source": "/api/:path*",
+        "destination": "http://localhost:5000/api/:path*",
+        "regex": "^/api(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))?(?:/)?$"
+      }
+    ],
+    "fallback": []
+  },
+  "dynamicRoutes": [
+    {
+      "page": "/admin/clients/[id]",
+      "regex": "^/admin/clients/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/admin/clients/(?<nxtPid>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/admin/visits/[id]",
+      "regex": "^/admin/visits/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/admin/visits/(?<nxtPid>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/caregiver/visits/[id]",
+      "regex": "^/caregiver/visits/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/caregiver/visits/(?<nxtPid>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/hr/applicants/[id]",
+      "regex": "^/hr/applicants/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/hr/applicants/(?<nxtPid>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/hr/caregivers/[id]",
+      "regex": "^/hr/caregivers/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/hr/caregivers/(?<nxtPid>[^/]+?)(?:/)?$"
+    }
+  ],
+  "staticRoutes": [
+    {
+      "page": "/",
+      "regex": "^/(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/(?:/)?$"
+    },
+    {
+      "page": "/_global-error",
+      "regex": "^/_global\\-error(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/_global\\-error(?:/)?$"
+    },
+    {
+      "page": "/_not-found",
+      "regex": "^/_not\\-found(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/_not\\-found(?:/)?$"
+    },
+    {
+      "page": "/admin/clients",
+      "regex": "^/admin/clients(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/clients(?:/)?$"
+    },
+    {
+      "page": "/admin/dashboard",
+      "regex": "^/admin/dashboard(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/dashboard(?:/)?$"
+    },
+    {
+      "page": "/admin/users",
+      "regex": "^/admin/users(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/users(?:/)?$"
+    },
+    {
+      "page": "/admin/visits",
+      "regex": "^/admin/visits(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/visits(?:/)?$"
+    },
+    {
+      "page": "/apply",
+      "regex": "^/apply(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/apply(?:/)?$"
+    },
+    {
+      "page": "/caregiver/dashboard",
+      "regex": "^/caregiver/dashboard(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/caregiver/dashboard(?:/)?$"
+    },
+    {
+      "page": "/caregiver/visits",
+      "regex": "^/caregiver/visits(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/caregiver/visits(?:/)?$"
+    },
+    {
+      "page": "/client/care-plan",
+      "regex": "^/client/care\\-plan(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/client/care\\-plan(?:/)?$"
+    },
+    {
+      "page": "/client/dashboard",
+      "regex": "^/client/dashboard(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/client/dashboard(?:/)?$"
+    },
+    {
+      "page": "/client/visits",
+      "regex": "^/client/visits(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/client/visits(?:/)?$"
+    },
+    {
+      "page": "/hr/applicants",
+      "regex": "^/hr/applicants(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/hr/applicants(?:/)?$"
+    },
+    {
+      "page": "/hr/caregivers",
+      "regex": "^/hr/caregivers(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/hr/caregivers(?:/)?$"
+    },
+    {
+      "page": "/hr/dashboard",
+      "regex": "^/hr/dashboard(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/hr/dashboard(?:/)?$"
+    },
+    {
+      "page": "/login",
+      "regex": "^/login(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/login(?:/)?$"
+    },
+    {
+      "page": "/register",
+      "regex": "^/register(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/register(?:/)?$"
+    },
+    {
+      "page": "/staff/dashboard",
+      "regex": "^/staff/dashboard(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/staff/dashboard(?:/)?$"
+    }
+  ],
+  "dataRoutes": [],
+  "rsc": {
+    "header": "rsc",
+    "varyHeader": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch",
+    "prefetchHeader": "next-router-prefetch",
+    "didPostponeHeader": "x-nextjs-postponed",
+    "contentTypeHeader": "text/x-component",
+    "suffix": ".rsc",
+    "prefetchSegmentHeader": "next-router-segment-prefetch",
+    "prefetchSegmentSuffix": ".segment.rsc",
+    "prefetchSegmentDirSuffix": ".segments",
+    "clientParamParsing": false,
+    "dynamicRSCPrerender": false
+  },
+  "rewriteHeaders": {
+    "pathHeader": "x-nextjs-rewritten-path",
+    "queryHeader": "x-nextjs-rewritten-query"
+  }
+}

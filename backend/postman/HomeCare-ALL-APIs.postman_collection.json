@@ -1,0 +1,1199 @@
+{
+  "info": {
+    "name": "Home-Care Central API (Phase 1 + Milestone 2)",
+    "description": "1) Run backend: npm run dev. 2) Folder 0: login as the role you need (cookies are kept automatically; log in again to switch role). 3) IDs (applicantId, caregiverId, clientId, visitId, docId, certId) are filled in automatically by the 'List'/'Create' requests - run those first. Suggested order: Public apply -> login HR -> List applicants -> Applicant detail -> move stages (screening, interview, offer) -> HIRE -> read the set-password link from the email (or the backend console) -> Set password -> login Staff. Then login Admin -> Create client -> Create care plan -> Create visit -> login Staff -> My visits -> Add note -> Mark completed -> login Client -> My visits / My care plan.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "0. Login (cookies are kept automatically)",
+      "item": [
+        {
+          "name": "Login as Admin",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/auth/login",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@homecare.local\",\n  \"password\": \"Admin@12345\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Login as HR",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/auth/login",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"hr@homecare.local\",\n  \"password\": \"Hr@12345678\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Login as Staff (office)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/auth/login",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"staff@homecare.local\",\n  \"password\": \"Staff@12345\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Login as Caregiver",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/auth/login",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"caregiver@homecare.local\",\n  \"password\": \"Caregiver@12345\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Login as Client",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/auth/login",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"client@homecare.local\",\n  \"password\": \"Client@12345\"\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Phase 1 (Auth + Users)",
+      "item": [
+        {
+          "name": "1. Auth",
+          "item": [
+            {
+              "name": "Health",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/health",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "health"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Login - Admin",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"admin@homecare.local\",\n  \"password\": \"Admin@12345\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/login",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "login"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Login - Staff",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"staff1@test.com\",\n  \"password\": \"Staff12345\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/login",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "login"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Login - Client",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"client1@test.com\",\n  \"password\": \"Client1234\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/login",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "login"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Me (current user)",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/auth/me",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "me"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Refresh token",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/auth/refresh",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "refresh"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Logout",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/auth/logout",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "logout"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "2. Dashboards",
+          "item": [
+            {
+              "name": "Client dashboard",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/dashboard/client",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "dashboard",
+                    "client"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Staff dashboard",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/dashboard/staff",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "dashboard",
+                    "staff"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Caregiver dashboard",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/dashboard/caregiver",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "dashboard",
+                    "caregiver"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Admin dashboard",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/dashboard/admin",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "dashboard",
+                    "admin"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "3. Admin - Users (login as admin first)",
+          "item": [
+            {
+              "name": "Create Staff",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"staff1@test.com\",\n  \"password\": \"Staff12345\",\n  \"role\": \"staff\",\n  \"firstName\": \"Sam\",\n  \"lastName\": \"Staff\",\n  \"phone\": \"9999999999\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/admin/users",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "users"
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "const j = pm.response.json(); if (j.data && j.data.user) pm.collectionVariables.set('userId', j.data.user.id);"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Create Client",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"client1@test.com\",\n  \"password\": \"Client1234\",\n  \"role\": \"client\",\n  \"firstName\": \"Cara\",\n  \"lastName\": \"Client\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/admin/users",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "users"
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "const j = pm.response.json(); if (j.data && j.data.user) pm.collectionVariables.set('userId', j.data.user.id);"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "List users",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/admin/users?page=1&limit=20",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "users"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "role",
+                      "value": "client",
+                      "disabled": true
+                    },
+                    {
+                      "key": "search",
+                      "value": "",
+                      "disabled": true
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get user by id",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/admin/users/{{userId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "users",
+                    "{{userId}}"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Update user",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"firstName\": \"Updated\",\n  \"city\": \"Noida\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/admin/users/{{userId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "users",
+                    "{{userId}}"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Deactivate user",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"isActive\": false\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/admin/users/{{userId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "users",
+                    "{{userId}}"
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "1. Public: job application (no login)",
+      "item": [
+        {
+          "name": "Options",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/recruitment/options"
+          }
+        },
+        {
+          "name": "Apply (form-data)",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": "{{baseUrl}}/recruitment/applications",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "firstName",
+                  "value": "Riya",
+                  "type": "text"
+                },
+                {
+                  "key": "lastName",
+                  "value": "Nurse",
+                  "type": "text"
+                },
+                {
+                  "key": "email",
+                  "value": "riya@example.com",
+                  "type": "text"
+                },
+                {
+                  "key": "phone",
+                  "value": "+1 416 555 0101",
+                  "type": "text"
+                },
+                {
+                  "key": "profession",
+                  "value": "RN",
+                  "type": "text"
+                },
+                {
+                  "key": "licenseNumber",
+                  "value": "CNO-123",
+                  "type": "text"
+                },
+                {
+                  "key": "yearsExperience",
+                  "value": "6",
+                  "type": "text"
+                },
+                {
+                  "key": "city",
+                  "value": "Toronto",
+                  "type": "text"
+                },
+                {
+                  "key": "resume",
+                  "type": "file",
+                  "src": []
+                },
+                {
+                  "key": "cprFirstAid",
+                  "type": "file",
+                  "src": []
+                },
+                {
+                  "key": "policeCheck",
+                  "type": "file",
+                  "src": []
+                },
+                {
+                  "key": "governmentId",
+                  "type": "file",
+                  "src": []
+                },
+                {
+                  "key": "certifications",
+                  "type": "file",
+                  "src": []
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "2. HR (login as HR or Admin)",
+      "item": [
+        {
+          "name": "List applicants",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/hr/applicants?status=applied&profession=RN&page=1"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const j=pm.response.json();if(j.data&&j.data.items&&j.data.items[0])pm.collectionVariables.set('applicantId',j.data.items[0].id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Applicant detail",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/hr/applicants/{{applicantId}}"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const j=pm.response.json();const d=j.data&&j.data.applicant&&j.data.applicant.documents;if(d&&d[0])pm.collectionVariables.set('docId',d[0].id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Move stage (emails the applicant)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/hr/applicants/{{applicantId}}/status",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"screening\",\n  \"note\": \"internal note\",\n  \"notifyApplicant\": true,\n  \"message\": \"Optional line for the applicant\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Add note",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/hr/applicants/{{applicantId}}/notes",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"body\": \"Great interview\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Upload extra document",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": "{{baseUrl}}/hr/applicants/{{applicantId}}/documents",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "docType",
+                  "value": "police_check",
+                  "type": "text"
+                },
+                {
+                  "key": "file",
+                  "type": "file",
+                  "src": []
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Download document",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/hr/applicants/{{applicantId}}/documents/{{docId}}/download"
+          }
+        }
+      ]
+    },
+    {
+      "name": "3. Caregivers (HR / Admin)",
+      "item": [
+        {
+          "name": "List",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/caregivers?expiringWithinDays=30"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const j=pm.response.json();if(j.data&&j.data.items&&j.data.items[0])pm.collectionVariables.set('caregiverId',j.data.items[0].id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Detail",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/caregivers/{{caregiverId}}"
+          }
+        },
+        {
+          "name": "Update",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/caregivers/{{caregiverId}}",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"licenseBody\": \"College of Nurses of Ontario\",\n  \"employmentStatus\": \"active\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Set availability",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/caregivers/{{caregiverId}}/availability",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"availability\": [\n    {\n      \"weekday\": 1,\n      \"startTime\": \"09:00\",\n      \"endTime\": \"17:00\"\n    }\n  ]\n}"
+            }
+          }
+        },
+        {
+          "name": "Set service areas",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/caregivers/{{caregiverId}}/service-areas",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"serviceAreas\": [\n    \"Toronto\",\n    \"Mississauga\"\n  ]\n}"
+            }
+          }
+        },
+        {
+          "name": "Add certification",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/caregivers/{{caregiverId}}/certifications",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"CPR / First Aid\",\n  \"issuer\": \"Red Cross\",\n  \"issuedOn\": \"2026-01-10\",\n  \"expiresOn\": \"2027-01-10\"\n}"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const j=pm.response.json();if(j.data&&j.data.certification)pm.collectionVariables.set('certId',j.data.certification.id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Delete certification",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/caregivers/{{caregiverId}}/certifications/{{certId}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "4. Clients + care plans (Admin)",
+      "item": [
+        {
+          "name": "Create client",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/clients",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Carl\",\n  \"lastName\": \"Client\",\n  \"phone\": \"555-2000\",\n  \"addressLine1\": \"1 Main St\",\n  \"city\": \"Toronto\",\n  \"careNeeds\": \"Mobility help\",\n  \"emergencyContactName\": \"Daughter\",\n  \"emergencyContactPhone\": \"555-2001\"\n}"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const j=pm.response.json();if(j.data&&j.data.client)pm.collectionVariables.set('clientId',j.data.client.id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "List clients",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/clients?search=carl"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const j=pm.response.json();if(j.data&&j.data.items&&j.data.items[0])pm.collectionVariables.set('clientId',j.data.items[0].id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Update client",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/clients/{{clientId}}",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"notes\": \"Prefers mornings\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Create care plan (archives the old one)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/clients/{{clientId}}/care-plans",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Plan v1\",\n  \"summary\": \"...\",\n  \"goals\": \"...\",\n  \"dailyTasks\": \"...\",\n  \"precautions\": \"...\"\n}"
+            }
+          }
+        },
+        {
+          "name": "List care plans",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/clients/{{clientId}}/care-plans"
+          }
+        }
+      ]
+    },
+    {
+      "name": "5. Scheduling (Admin only creates visits)",
+      "item": [
+        {
+          "name": "Dropdown options",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/visits/options"
+          }
+        },
+        {
+          "name": "Create visit (response includes warnings[])",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/visits",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"clientId\": \"{{clientId}}\",\n  \"caregiverId\": \"{{caregiverId}}\",\n  \"startAt\": \"2026-11-02T14:00:00Z\",\n  \"endAt\": \"2026-11-02T15:00:00Z\",\n  \"serviceType\": \"Personal care\",\n  \"instructions\": \"Ring the bell twice\"\n}"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const j=pm.response.json();if(j.data&&j.data.visit)pm.collectionVariables.set('visitId',j.data.visit.id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "List visits",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/visits?from=2026-11-01T00:00:00Z&to=2026-12-01T00:00:00Z"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const j=pm.response.json();if(j.data&&j.data.items&&j.data.items[0])pm.collectionVariables.set('visitId',j.data.items[0].id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Visit detail (with caregiver notes)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/visits/{{visitId}}"
+          }
+        },
+        {
+          "name": "Reschedule / reassign",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/visits/{{visitId}}",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"caregiverId\": \"{{caregiverId}}\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Cancel",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/visits/{{visitId}}/cancel",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reason\": \"Client request\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Mark missed",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": "{{baseUrl}}/visits/{{visitId}}/missed"
+          }
+        }
+      ]
+    },
+    {
+      "name": "6. Caregiver portal (login as staff)",
+      "item": [
+        {
+          "name": "My visits",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/caregiver/visits"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const j=pm.response.json();if(j.data&&j.data.items&&j.data.items[0])pm.collectionVariables.set('visitId',j.data.items[0].id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Visit detail + care plan",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/caregiver/visits/{{visitId}}"
+          }
+        },
+        {
+          "name": "Add note",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/caregiver/visits/{{visitId}}/notes",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"body\": \"Client in good spirits\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Mark completed",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/caregiver/visits/{{visitId}}/complete",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"note\": \"All went well\"\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "7. Client portal (login as client)",
+      "item": [
+        {
+          "name": "My visits",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/client/visits"
+          }
+        },
+        {
+          "name": "My care plan",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/client/care-plan"
+          }
+        }
+      ]
+    },
+    {
+      "name": "8. Dashboards",
+      "item": [
+        {
+          "name": "Admin",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/dashboard/admin"
+          }
+        },
+        {
+          "name": "HR",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/dashboard/hr"
+          }
+        },
+        {
+          "name": "Staff",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/dashboard/staff"
+          }
+        },
+        {
+          "name": "Caregiver",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/dashboard/caregiver"
+          }
+        },
+        {
+          "name": "Client",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/dashboard/client"
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5000/api"
+    },
+    {
+      "key": "applicantId",
+      "value": ""
+    },
+    {
+      "key": "docId",
+      "value": ""
+    },
+    {
+      "key": "caregiverId",
+      "value": ""
+    },
+    {
+      "key": "certId",
+      "value": ""
+    },
+    {
+      "key": "clientId",
+      "value": ""
+    },
+    {
+      "key": "visitId",
+      "value": ""
+    }
+  ]
+}

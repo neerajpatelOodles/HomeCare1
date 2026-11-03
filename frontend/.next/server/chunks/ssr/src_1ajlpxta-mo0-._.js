@@ -1,0 +1,3 @@
+module.exports=[[67762,a=>{var b=a.i(7997),c=a.i(16012);a.s(["default",0,function({children:a}){return(0,b.jsx)(c.default,{role:"caregiver",children:a})}])},56534,a=>{let b=(0,a.i(11857).registerClientReference)(function(){throw Error("Attempted to call the default export of [project]/src/components/ProtectedRoute.js from the server, but it's on the client. It's not possible to invoke a client function from the server, it can only be rendered as a Component or passed to props of a Client Component.")},"[project]/src/components/ProtectedRoute.js","default");a.s(["default",0,b])},16012,a=>{var b=a.i(56534);a.n(b)}],23538,function(a){a.n(a.i(67762))}];
+
+//# sourceMappingURL=src_1ajlpxta-mo0-._.js.map

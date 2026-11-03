@@ -1,0 +1,39 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/hr/layout,_N_T_/hr/caregivers/layout,_N_T_/hr/caregivers/page,_N_T_/hr/caregivers"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/hr/caregivers/__PAGE__"
+  ],
+  "prefetchHints": {
+    "hints": 64,
+    "slots": {
+      "children": {
+        "hints": 96,
+        "slots": {
+          "children": {
+            "hints": 96,
+            "slots": {
+              "children": {
+                "hints": 160,
+                "slots": null
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "routeCache": {
+    "key": "/route-cache/APP_PAGE/f1f1e714ef732de299056a3210f6d1a62e91a20e984f2907c8f83ea2f9097ed9/$/hr/caregivers",
+    "owner": {
+      "kind": "APP_PAGE",
+      "sourceRoute": "/hr/caregivers/page"
+    },
+    "isFallback": false
+  }
+}

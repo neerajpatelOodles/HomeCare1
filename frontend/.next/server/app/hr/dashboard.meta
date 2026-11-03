@@ -1,0 +1,39 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/hr/layout,_N_T_/hr/dashboard/layout,_N_T_/hr/dashboard/page,_N_T_/hr/dashboard"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/hr/dashboard/__PAGE__"
+  ],
+  "prefetchHints": {
+    "hints": 64,
+    "slots": {
+      "children": {
+        "hints": 96,
+        "slots": {
+          "children": {
+            "hints": 96,
+            "slots": {
+              "children": {
+                "hints": 160,
+                "slots": null
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "routeCache": {
+    "key": "/route-cache/APP_PAGE/bd33231b94e80cecb1f3ada68012a0ca37226b867e4ba073ee200439cb7e9969/$/hr/dashboard",
+    "owner": {
+      "kind": "APP_PAGE",
+      "sourceRoute": "/hr/dashboard/page"
+    },
+    "isFallback": false
+  }
+}

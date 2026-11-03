@@ -1,0 +1,39 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/caregiver/layout,_N_T_/caregiver/dashboard/layout,_N_T_/caregiver/dashboard/page,_N_T_/caregiver/dashboard"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/caregiver/dashboard/__PAGE__"
+  ],
+  "prefetchHints": {
+    "hints": 64,
+    "slots": {
+      "children": {
+        "hints": 96,
+        "slots": {
+          "children": {
+            "hints": 96,
+            "slots": {
+              "children": {
+                "hints": 160,
+                "slots": null
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "routeCache": {
+    "key": "/route-cache/APP_PAGE/bcf5d73175b8ff84bd82bf9d886747910fd90f9474b266d4f3b6f785fdd66272/$/caregiver/dashboard",
+    "owner": {
+      "kind": "APP_PAGE",
+      "sourceRoute": "/caregiver/dashboard/page"
+    },
+    "isFallback": false
+  }
+}

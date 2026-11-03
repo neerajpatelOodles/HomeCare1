@@ -1,0 +1,7 @@
+{
+  "/admin/users/page": "app/admin/users/page.js",
+  "/caregiver/dashboard/page": "app/caregiver/dashboard/page.js",
+  "/caregiver/visits/[id]/page": "app/caregiver/visits/[id]/page.js",
+  "/client/dashboard/page": "app/client/dashboard/page.js",
+  "/hr/caregivers/page": "app/hr/caregivers/page.js"
+}
